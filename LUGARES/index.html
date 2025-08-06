@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+    <h1>LUGARES PARA VISITAR</h1>
+    </header>
+    <div id="tarjeta" class="grid"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+    const lug = await fetch("lugares.json");
+    const lugares = await lug.json();
+    const tarjeta = document.getElementById("tarjeta");
+
+    lugares.slice(0, 20).forEach(lugar => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const img = document.createElement("img")
+        img.src = lugar.url_imagen;
+        img.alt = lugar.nombre;
+
+        const nombre = document.createElement("h3");
+        nombre.textContent = lugar.nombre;
+
+        const pais = document.createElement("p");
+        pais.classList.add("pais");
+        pais.textContent = lugar.pais;
+
+        const ciudad = document.createElement("p");
+        ciudad.classList.add("ciudad");
+        ciudad.textContent = lugar.ciudad;
+
+        card.appendChild(img);
+        card.appendChild(nombre);
+        card.appendChild(pais);
+        card.appendChild(ciudad);
+
+        card.addEventListener("click", () => {
+        window.location.href = `page.html?id=${lugar.id}`;
+        });
+
+        tarjeta.appendChild(card);
+    });
+    })
+</script>
+</body>
+</html>
