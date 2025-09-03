@@ -1,55 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUGARES PARA VISITAR</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lugares para Visitar</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <header>
+  <header>
     <h1>LUGARES PARA VISITAR</h1>
-    </header>
-    <div id="tarjeta" class="grid"></div>
+  </header>
+  <div id="galeria" class="grid"></div>
 
-<script>
+  <script>
     document.addEventListener("DOMContentLoaded", async () => {
-    const lug = await fetch("lugares.json");
-    const lugares = await lug.json();
-    const tarjeta = document.getElementById("tarjeta");
+      const lug = await fetch("lugares.json");
+      const lugares = await lug.json();
+      const galeria = document.getElementById("galeria");
 
-    lugares.slice(0, 20).forEach(lugar => {
+      lugares.slice(0, 20).forEach(lugar => {
         const card = document.createElement("div");
         card.classList.add("card");
 
-        const img = document.createElement("img")
-        img.src = lugar.url_imagen;
-        img.alt = lugar.nombre;
-
-        const nombre = document.createElement("h3");
-        nombre.textContent = lugar.nombre;
-
-        const pais = document.createElement("p");
-        pais.classList.add("pais");
-        pais.textContent = lugar.pais;
-
-        const ciudad = document.createElement("p");
-        ciudad.classList.add("ciudad");
-        ciudad.textContent = lugar.ciudad;
-
-        card.appendChild(img);
-        card.appendChild(nombre);
-        card.appendChild(pais);
-        card.appendChild(ciudad);
+        card.innerHTML = `
+          <img src="${lugar.url_imagen}" alt="${lugar.nombre}">
+          <div class="overlay">
+            <h2>${lugar.nombre}</h2>
+            <p>${lugar.ciudad}, ${lugar.pais}</p>
+          </div>
+        `;
 
         card.addEventListener("click", () => {
-        window.location.href = `page.html?id=${lugar.id}`;
+          window.location.href = `page.html?id=${lugar.id}`;
         });
 
-        tarjeta.appendChild(card);
+        galeria.appendChild(card);
+      });
     });
-    })
-</script>
+  </script>
 </body>
-
 </html>
