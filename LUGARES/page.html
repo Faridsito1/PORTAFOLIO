@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DETALLES DEL LUGAR</title>
+  <title>Detalle del Lugar</title>
   <link rel="stylesheet" href="./style2.css">
 </head>
 <body>
@@ -19,74 +19,46 @@
       const lugar = lugares.find(l => l.id === id);
       const tarjeta = document.getElementById("page");
 
-      tarjeta.style.background = `linear-gradient(135deg, ${lugar.categoria.colorPrimario}, ${lugar.categoria.colorSecundario})`;
+      tarjeta.innerHTML = `
+        <img src="${lugar.url_imagen}" alt="${lugar.nombre}">
+        <div class="contenido">
+          <h1>${lugar.nombre}</h1>
+          <p>${lugar.descripcion}</p>
+          <p><strong>Ciudad:</strong> ${lugar.ciudad}</p>
+          <p><strong>País:</strong> ${lugar.pais}</p>
+          <p><strong>Coordenadas:</strong> Lat ${lugar.coordenadas.latitud}, Long ${lugar.coordenadas.longitud}</p>
+          <p><strong>Categoría:</strong> ${lugar.categoria.nombre}</p>
 
-      const titulo = document.createElement("h1");
-      titulo.textContent = lugar.nombre;
+          <h3>Datos Interesantes</h3>
+          <ul>
+            ${lugar.datosInteresantes.map(d => `<li>${d.titulo}: ${d.valor}</li>`).join("")}
+          </ul>
 
-      const img = document.createElement("img");
-      img.src = lugar.url_imagen;
-      img.alt = lugar.nombre;
+          <h3>Actividades Recomendadas</h3>
+          <ul>
+            ${lugar.actividadesRecomendadas.map(a => `<li>${a}</li>`).join("")}
+          </ul>
 
-      const descripcion = document.createElement("p");
-      descripcion.textContent = lugar.descripcion;
+          <div class="navegacion">
+            <button class="nav-btn" id="anterior">⬅ Anterior</button>
+            <a href="index.html" class="volver">Volver al Inicio</a>
+            <button class="nav-btn" id="siguiente">Siguiente ➡</button>
+          </div>
+        </div>
+      `;
 
-      const ciudad = document.createElement("p");
-      ciudad.innerHTML = `<strong>Ciudad:</strong> ${lugar.ciudad}`;
-
-      const pais = document.createElement("p");
-      pais.innerHTML = `<strong>País:</strong> ${lugar.pais}`;
-
-      const coordenadas = document.createElement("p");
-      coordenadas.innerHTML = `<strong>Coordenadas:</strong> Latitud ${lugar.coordenadas.latitud}, Longitud ${lugar.coordenadas.longitud}`;
-
-      const categoria = document.createElement("p");
-      categoria.innerHTML = `<strong>Categoría:</strong> ${lugar.categoria.nombre}`;
-
-      const subtitulo1 = document.createElement("h3");
-      subtitulo1.textContent = "Datos Interesantes";
-
-      const datos = document.createElement("ul");
-      lugar.datosInteresantes.forEach(dato => {
-        const li = document.createElement("li");
-        li.textContent = `${dato.titulo}: ${dato.valor}`;
-        datos.appendChild(li);
+      document.getElementById("anterior").addEventListener("click", () => {
+        const prevId = id > 1 ? id - 1 : lugares.length;
+        window.location.href = `page.html?id=${prevId}`;
       });
 
-      const subtitulo2 = document.createElement("h3");
-      subtitulo2.textContent = "Actividades Recomendadas";
-
-      const lista = document.createElement("ul");
-      lugar.actividadesRecomendadas.forEach(a => {
-        const li = document.createElement("li");
-        li.textContent = a;
-        lista.appendChild(li);
+      document.getElementById("siguiente").addEventListener("click", () => {
+        const nextId = id < lugares.length ? id + 1 : 1;
+        window.location.href = `page.html?id=${nextId}`;
       });
-
-      const botonAtras = document.createElement("a");
-      botonAtras.textContent = "Volver al Inicio";
-      botonAtras.href = "index.html";
-      botonAtras.className = "volver";
-
-      tarjeta.appendChild(titulo);
-      tarjeta.appendChild(img);
-      tarjeta.appendChild(descripcion);
-      tarjeta.appendChild(ciudad);
-      tarjeta.appendChild(pais);
-      tarjeta.appendChild(coordenadas);
-      tarjeta.appendChild(categoria);
-      tarjeta.appendChild(subtitulo1);
-      tarjeta.appendChild(datos);
-      tarjeta.appendChild(subtitulo2);
-      tarjeta.appendChild(lista);
-      tarjeta.appendChild(botonAtras);
     }
 
     cargarPage();
   </script>
 </body>
 </html>
-
-
-
-
