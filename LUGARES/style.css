@@ -1,126 +1,127 @@
 body {
   margin: 0;
   padding: 0;
-  background: url(fondo.png);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #232526, #414345);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-header{
-    text-align: center;
-    color: rgb(255, 208, 0);
-    font-size: 2em;
-    background-color: rgb(173, 173, 156);
-    height: 80px;
+header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(90deg, #ffcc00, #ff8800);
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  overflow: hidden;
 }
 
-h1{
-    margin: 0;
+header h1 {
+  margin: 0;
+  animation: shine 3s infinite linear;
+  background: linear-gradient(90deg, #fff, #ffcc00, #fff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-h3{
-  margin: 3px;
+@keyframes shine {
+  from { background-position: 200% center; }
+  to { background-position: -200% center; }
 }
-#tarjeta{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 20px;
+
+
+@keyframes fadeDown {
+  from { transform: translateY(-80px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
+
+#galeria {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 20px;
+  justify-items: center; 
+}
+
 
 .card {
-  background: rgb(173, 173, 156);
-  border-radius: 12px;
+  position: relative;
   overflow: hidden;
-  width: 220px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
-  width: 100%;
+  border-radius: 15px;
+  cursor: pointer;
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.6s; }
+.card:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .card img {
   width: 100%;
-  height: 190px;
+  height: 100%;
   object-fit: cover;
-  border-bottom: 2px solid #444;
+  transition: transform 1s ease, filter 0.5s ease;
 }
 
-.card h3{
-    color: white;
-    text-align: center;
+.card:hover img {
+  transform: scale(1.2);
+  filter: blur(2px) brightness(70%);
 }
 
-.pais{
-    color: rgb(255, 208, 0);
-    text-align: center;
-    font-size: 20px;
-    margin: 0;
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.ciudad{
-    color: rgb(92, 75, 0);
-    text-align: center;
-    font-size: 20px;
-    margin: 0;
-    
+.card:hover .overlay {
+  opacity: 1;
 }
 
-.tarjeta{
-    padding-right: 0px;
+.overlay h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #ffd166;
+  animation: slideUp 0.6s ease;
+}
+
+.overlay p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  animation: slideUp 0.8s ease;
 }
 
 
-.card:hover{
-  transform: scale(1.03);
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-@media (max-width: 479px) {
-  #tarjeta {
-    grid-template-columns: repeat(1, 1fr);
-    padding: 10px;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  header {
-    font-size: 1.2em;
-    height: auto;
-    padding: 10px 0;
-  }
-}
-
-@media (min-width: 480px) and (max-width: 767px) {
-  #tarjeta {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 15px;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  header {
-    font-size: 1.2em;
-    height: auto;
-    padding: 10px 0;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  #tarjeta {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-  #tarjeta {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  #tarjeta {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
