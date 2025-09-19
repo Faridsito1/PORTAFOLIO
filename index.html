@@ -1,54 +1,194 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio de Programación</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a52d.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>MI PORTAFOLIO</h1>
-        <p>Aquí encontrarás algunos de mis trabajos en clase.</p>
+  <div id="particles-js"></div>
+  <div class="overlay"></div>
+  
+  <div class="container">
+    <header data-aos="fade-down">
+      <div class="logo">Mi Portafolio</div>
+      <div class="theme-toggle" id="theme-toggle"></div>
     </header>
-    <div class="container">
-        <h2>MIS PROYECTOS</h2>
-        <div class="proyectos">
-            <div class="proyecto">
-                <h3>¿QUIEN SOY?</h3>
-                <p>Una página de presentación personal sencilla.</p>
-                <a href="./QUIEN SOY CARLOS OLIVEROS/index.html " target="_blank">Ver en Netlify</a>
-            </div>
-            <div class="proyecto">
-                <h3>HOJA DE VIDA</h3>
-                <p>Versión digital de tu currículum.</p>
-                <a href="./HOJA DE VIDA FARID/index.html" target="_blank">Ver en Netlify</a>
-            </div>
-            <div class="proyecto">
-                <h3>TIENDA MOTOCROSS</h3>
-                <p>Un sitio web simulado de una tienda de motocross.</p>
-                <a href="./TIENDA CARLOS OLIVEROS/index.html" target="_blank">Ver en Netlify</a>
-            </div>
-            <div class="proyecto">
-                <h3>CALCULADORA</h3>
-                <p>Un Calculadora sencilla.</p>
-                <a href="./CALCULADORA/index.html" target="_blank">Ver en Netlify</a>
-            </div>
-            <div class="proyecto">
-                <h3>LUGARES PARA VISITAR</h3>
-                <p>Una lista de lugares increibles que puedes visitar.</p>
-                <a href="./LUGARES/index.html" target="_blank">Ver en Netlify</a>
-            </div>
-            <div class="proyecto">
-                <h3>GESTION RESTAURANTE</h3>
-                <p>Una pagina web para la Gestion de Mesas y Reservas.</p>
-                <a href="./RESTAURANTE/mesas.html" target="_blank">Ver en Netlify</a>
-            </div>
+
+    <div class="layout">
+      <aside class="perfil" id="inicio" data-aos="fade-right" data-aos-delay="200">
+        <div class="perfil-img">
+          <img src="avatar.png" alt="Foto de perfil de Carlos Farid">
         </div>
+        <h1>Carlos Farid</h1>
+        <p>💻 Estudiante de programación apasionado por el desarrollo web. Siempre aprendiendo nuevas tecnologías y creando proyectos innovadores.</p>
+        <section id="habilidades" class="habilidades" data-aos="fade-up" data-aos-delay="300">
+        <div class="habilidadesTecnicas">
+      <h2>Habilidades Técnicas</h2>
+      <div class="skills-container">
+        <div class="skill">
+          <div class="skill-name">HTML/CSS</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="85%"></div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-bar">
+            <div class="skill-progress" data-width="75%"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <footer>
-        &copy; 2025 Carlos Farid Oliveros Perez | Contacto: oliverosperezcarlosfarid@gmail.com
-    </footer>
+    </section>
+      </aside>
 
+      <section class="proyectos" id="proyectos">
+        <div class="proyecto" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-glare="true" data-aos="fade-up" data-aos-delay="100">
+          <h3>¿QUIEN SOY?</h3>
+          <p>Página de presentación personal con diseño moderno y responsive.</p>
+          <a href="./QUIEN SOY CARLOS OLIVEROS/index.html" target="_blank">Ver Proyecto</a>
+        </div>
+        <div class="proyecto" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-glare="true" data-aos="fade-up" data-aos-delay="200">
+          <h3>HOJA DE VIDA</h3>
+          <p>Currículum vitae digital interactivo con diseño elegante y profesional.</p>
+          <a href="./HOJA DE VIDA FARID/index.html" target="_blank">Ver Proyecto</a>
+        </div>
+        <div class="proyecto" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-glare="true" data-aos="fade-up" data-aos-delay="300">
+          <h3>TIENDA MOTOCROSS</h3>
+          <p>E-commerce especializado en productos de motocross con carrito de compras.</p>
+          <a href="./TIENDA CARLOS OLIVEROS/index.html" target="_blank">Ver Proyecto</a>
+        </div>
+        <div class="proyecto" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-glare="true" data-aos="fade-up" data-aos-delay="400">
+          <h3>CALCULADORA</h3>
+          <p>Calculadora funcional con operaciones básicas y diseño intuitivo.</p>
+          <a href="./CALCULADORA/index.html" target="_blank">Ver Proyecto</a>
+        </div>
+        <div class="proyecto" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-glare="true" data-aos="fade-up" data-aos-delay="500">
+          <h3>LUGARES PARA VISITAR</h3>
+          <p>Galeria de destinos turísticos increíbles con información detallada.</p>
+          <a href="./LUGARES/index.html" target="_blank">Ver Proyecto</a>
+        </div>
+        <div class="proyecto" data-tilt data-tilt-max="10" data-tilt-speed="1000" data-tilt-glare="true" data-aos="fade-up" data-aos-delay="600">
+          <h3>GESTIÓN RESTAURANTE</h3>
+          <p>Sistema de gestión de mesas y reservas para restaurantes.</p>
+          <a href="./RESTAURANTE/mesas.html" target="_blank">Ver Proyecto</a>
+        </div>
+      </section>
+    </div>
+  </div>
 
+  <a href="mailto:oliverosperezcarlosfarid@gmail.com"></a>
 
+  <footer>
+    <p>© 2023 Carlos Farid - Desarrollador Web</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#6c63ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#6c63ff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 1 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+
+    VanillaTilt.init(document.querySelectorAll(".proyecto"), {
+      max: 10,
+      speed: 1000,
+      glare: true,
+      "max-glare": 0.2,
+      scale: 1.02
+    });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      
+      if (document.body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const skills = document.querySelectorAll('.skill-progress');
+      skills.forEach(skill => {
+        const width = skill.getAttribute('data-width');
+        skill.style.width = '0';
+        setTimeout(() => {
+          skill.style.transition = 'width 1.5s ease';
+          skill.style.width = width;
+        }, 500);
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
