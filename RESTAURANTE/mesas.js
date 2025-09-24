@@ -7,6 +7,7 @@ function guardarListaMesas() {
 function estaMesaOcupada(mesa) {
     const ahora = new Date();
     const listaReservas = JSON.parse(localStorage.getItem("listaReservas")) || [];
+    
     const reservasActivas = listaReservas.filter(reserva => {
         if (reserva.idMesaAsignada !== mesa.ubicacionMesa) return false;
         if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Expirada") return false;
@@ -24,7 +25,7 @@ function estaMesaDisponibleEnHorario(mesa, fecha, hora, duracion, indiceReservaE
     const listaReservas = JSON.parse(localStorage.getItem("listaReservas")) || [];
     const inicioNuevaReserva = new Date(`${fecha}T${hora}`);
     const finNuevaReserva = new Date(inicioNuevaReserva.getTime() + duracion * 60 * 60 * 1000);
-    
+
     return !listaReservas.some((reserva, i) => {
         if (i === indiceReservaEditar) return false;
         if (reserva.idMesaAsignada !== mesa.ubicacionMesa) return false;
