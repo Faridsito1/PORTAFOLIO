@@ -12,7 +12,7 @@ function estaMesaDisponibleEnHorario(mesa, fecha, hora, duracion, indiceReservaE
     return !listaReservas.some((reserva, i) => {
         if (i === indiceReservaEditar) return false;
         if (reserva.idMesaAsignada !== mesa.ubicacionMesa) return false;
-        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Expirada") return false;
+        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Expirada" || reserva.estadoReserva === "Pagada") return false;
         
         const inicioExistente = new Date(`${reserva.fechaReserva}T${reserva.horaReserva}`);
         const finExistente = new Date(inicioExistente.getTime() + (reserva.duracionHoras || 2) * 60 * 60 * 1000);
@@ -64,7 +64,7 @@ function mostrarReservas(lista = listaReservas) {
                     <div class="mt-2 d-flex gap-1 flex-wrap">
                         <button class="btn btn-warning btn-sm" onclick="abrirEdicionReserva(${indice})">Editar</button>
                         <button class="btn btn-success btn-sm" onclick="confirmarReserva(${indice})" ${estado === "Pagada" || estado === "Cancelada" || estado === "Expirada" ? "disabled" : ""}>Pagar</button>
-                        <button class="btn btn-danger btn-sm" onclick="cancelarReserva(${indice})" ${estado === "Cancelada" || estado === "Expirada" ? "disabled" : ""}>Cancelar</button>
+                        <button class="btn btn-danger btn-sm" onclick="cancelarReserva(${indice})" ${estado === "Cancelada" || estado === "Expirada" || estado === "Pagada" ? "disabled" : ""}>Cancelar</button>
                         <button class="btn btn-danger btn-sm" onclick="eliminarReserva(${indice})">Eliminar</button>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ function hayConflictoReserva(nuevaReserva, indiceEditar = null) {
         if (i === indiceEditar) return false;
         if (!reserva.idMesaAsignada) return false;
         if (reserva.idMesaAsignada !== nuevaReserva.idMesaAsignada) return false;
-        if (reserva.estadoReserva === "Cancelada") return false;
+        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Expirada" || reserva.estadoReserva === "Pagada") return false;
 
         const inicioExistente = new Date(`${reserva.fechaReserva}T${reserva.horaReserva}`);
         const finExistente = new Date(inicioExistente.getTime() + (reserva.duracionHoras || 2) * 60 * 60 * 1000);
@@ -94,7 +94,15 @@ function hayConflictoReserva(nuevaReserva, indiceEditar = null) {
 function cargarMesasDisponibles(fecha, hora, duracion, indiceReservaEditar = null) {
     const selectMesas = document.getElementById("selectMesasDisponibles");
     const inputPersonas = document.getElementById("inputNumeroPersonas");
+    
     if (!selectMesas) return;
+    
+    // Verificar que tenemos todos los datos necesarios
+    if (!fecha || !hora) {
+        selectMesas.innerHTML = `<option value="">Selecciona fecha y hora primero</option>`;
+        if (inputPersonas) inputPersonas.disabled = true;
+        return;
+    }
     
     selectMesas.innerHTML = "";
     let hayMesasDisponibles = false;
@@ -129,7 +137,6 @@ function actualizarMaximoPersonas() {
         const selectedOption = selectMesas.options[selectMesas.selectedIndex];
         const capacidad = parseInt(selectedOption.getAttribute("data-capacidad"));
         
-        inputPersonas.setAttribute("max", capacidad);
         if (parseInt(inputPersonas.value || 0) > capacidad) {
             inputPersonas.value = capacidad;
         }
@@ -142,24 +149,34 @@ function actualizarMesasDisponibles() {
     const duracion = parseInt(document.getElementById("inputDuracion").value) || 2;
     const indiceReserva = document.getElementById("indiceReserva").value;
     
-    if (fecha && hora) {
-        cargarMesasDisponibles(fecha, hora, duracion, indiceReserva ? parseInt(indiceReserva) : null);
+    // Si no hay fecha u hora, usar valores por defecto
+    const fechaUsar = fecha || new Date().toISOString().split('T')[0];
+    const horaUsar = hora || '12:00';
+    
+    if (fechaUsar && horaUsar) {
+        cargarMesasDisponibles(fechaUsar, horaUsar, duracion, indiceReserva ? parseInt(indiceReserva) : null);
     }
 }
 
 document.getElementById("btnAgregarReserva").addEventListener("click", () => {
     const hoy = new Date();
     const fechaHoy = hoy.toISOString().split('T')[0];
-    const horaActual = hoy.toHours().toString().padStart(2, '0') + ':' + hoy.getMinutes().toString().padStart(2, '0');
+    const horaActual = hoy.getHours().toString().padStart(2, '0') + ':' + hoy.getMinutes().toString().padStart(2, '0');
     
+    // Resetear el formulario
+    document.getElementById("formularioReserva").reset();
+    
+    // Establecer fecha y hora actuales por defecto
     document.getElementById("inputFechaReserva").value = fechaHoy;
     document.getElementById("inputHoraReserva").value = horaActual;
+    document.getElementById("inputDuracion").value = 2;
     
-    actualizarMesasDisponibles();
-    
-    document.getElementById("formularioReserva").reset();
     document.getElementById("indiceReserva").value = "";
     document.getElementById("grupoEstadoReserva").classList.add("d-none");
+    
+    // Ahora sí cargar mesas disponibles con los valores establecidos
+    actualizarMesasDisponibles();
+    
     new bootstrap.Modal(document.getElementById("modalReserva")).show();
 });
 
@@ -186,7 +203,7 @@ document.getElementById("formularioReserva").addEventListener("submit", (e) => {
         return;
     }
     if (!fechaReserva) {
-        Swal.fire("Error", "Selecciona una fecha.", "error");
+        Swal.fire("Error", "Selecciona una fecha.", "error");       
         return;
     }
     if (!horaReserva) {
@@ -196,7 +213,7 @@ document.getElementById("formularioReserva").addEventListener("submit", (e) => {
 
     const [h, m] = horaReserva.split(":").map(Number);
     if (h < 8 || h > 23 || (h === 23 && m > 0)) {
-        Swal.fire("Error", "La hora debe estar entre 08:00 y 23:00.", "error");
+        Swal.fire("Error", "La hora debe estar entre 08:00a.m y 11:00p.m.", "error");
         return;
     }
 
@@ -271,6 +288,7 @@ function abrirEdicionReserva(indice) {
     document.getElementById("inputDuracion").value = reserva.duracionHoras || 2;
 
     cargarMesasDisponibles(reserva.fechaReserva, reserva.horaReserva, reserva.duracionHoras || 2, indice);
+    
     setTimeout(() => {
         document.getElementById("selectMesasDisponibles").value = reserva.idMesaAsignada;
         actualizarMaximoPersonas();
@@ -293,7 +311,7 @@ function confirmarReserva(indice) {
     listaReservas[indice].estadoReserva = "Pagada";
     guardarListaReservas();
     mostrarReservas();
-    Swal.fire("Éxito", "La reserva ha sido pagada.", "success");
+    Swal.fire("Éxito", "La reserva ha sido pagada y la mesa está disponible nuevamente.", "success");
 }
 
 function eliminarReserva(indice) {
@@ -378,7 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         document.getElementById("inputFechaReserva").value = fechaHoy;
         document.getElementById("inputHoraReserva").value = horaActual;
-        
+
         actualizarMesasDisponibles();
         
         setTimeout(() => {
@@ -392,9 +410,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
             const inputPersonas = document.getElementById("inputNumeroPersonas");
-            if (inputPersonas) {
-                inputPersonas.value = 1;
-                inputPersonas.setAttribute("max", mesaSeleccionada.capacidadMesa);
+            if (inputPersonas.value > mesaSeleccionada.capacidadMesa) {
+                inputPersonas.value = mesaSeleccionada.capacidadMesa;
             }
 
             const modalEl = document.getElementById("modalReserva");
