@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armamento - Operación: Fuego Táctico</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body class="tactical-armamento">
+    <header class="tactical-header">
+        <nav class="tactical-nav">
+            <div class="nav-brand">
+                <span class="brand-text">OPERACIÓN</span>
+                <span class="brand-subtext">FUEGO TÁCTICO</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">COMANDO</a></li>
+                <li><a href="armamento.html" class="nav-link active">ARMAMENTO</a></li>
+                <li><a href="vehiculos.html" class="nav-link">VEHÍCULOS</a></li>
+                <li><a href="#" class="nav-link btn-login">ACCESO SEGURO</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="tactical-main">
+        <section class="page-header">
+            <h1>BASE DE DATOS DE ARMAMENTO</h1>
+            <p>Catálogo completo de sistemas de armas disponibles para despliegue táctico</p>
+        </section>
+
+        <section class="filters-section">
+            <div class="filter-group">
+                <label for="type-filter">TIPO:</label>
+                <select id="type-filter">
+                    <option value="all">TODOS</option>
+                    <option value="rifle">RIFLES</option>
+                    <option value="sniper">FRANCOTIRADORES</option>
+                    <option value="shotgun">ESCOPETAS</option>
+                    <option value="explosive">EXPLOSIVOS</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sort-filter">ORDENAR POR:</label>
+                <select id="sort-filter">
+                    <option value="power">PODER DE FUEGO</option>
+                    <option value="range">ALCANCE</option>
+                    <option value="rate">CADENCIA</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="BUSCAR ARMAMENTO...">
+                <button>BUSCAR</button>
+            </div>
+        </section>
+
+        <section class="armamento-grid">
+        </section>
+    </main>
+
+    <footer class="tactical-footer">
+        <p>© 2023 OPERACIÓN: FUEGO TÁCTICO. Todos los derechos reservados. | Confidencial Nivel 5</p>
+    </footer>
+
+    <script src="js/armamento.js"></script>
+
+</body>
+</html>
