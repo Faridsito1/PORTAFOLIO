@@ -54,7 +54,7 @@ body {
 }
 
 .estado-ocupada {
-    background: linear-gradient(135deg, #ff4d4d, #ff9999);
+    background: linear-gradient(135deg, #4da9ff, #99ceff);
 }
 
 .estado-deshabilitada {
