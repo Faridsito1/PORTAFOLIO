@@ -26,47 +26,47 @@
     </div>
 
     <div class="modal fade" id="modalMesa" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Gestionar Mesa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formularioMesa">
-                        <input type="hidden" id="indiceMesa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gestionar Mesa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formularioMesa">
+                    <input type="hidden" id="indiceMesa">
 
-                        <div class="mb-3">
-                            <label>Capacidad</label>
-                            <input type="number" id="inputCapacidadMesa" class="form-control" min="1" required>
-                        </div>
+                    <div class="mb-3">
+                        <label>Capacidad</label>
+                        <input type="number" id="inputCapacidadMesa" class="form-control" min="1" required>
+                    </div>
 
-                        <div class="mb-3">
-                            <label>Ubicación</label>
-                            <select id="selectUbicacion" class="form-control">
-                                <option value="Ventana">Ventana</option>
-                                <option value="Barra">Barra</option>
-                                <option value="Terraza">Terraza</option>
-                                <option value="Zona Central">Zona Central</option>
-                                <option value="Salón Privado">Salón Privado</option>
-                                <option value="Zona VIP">Zona VIP</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label>Ubicación</label>
+                        <select id="selectUbicacion" class="form-control">
+                            <option value="Ventana">Ventana</option>
+                            <option value="Barra">Barra</option>
+                            <option value="Terraza">Terraza</option>
+                            <option value="Zona Central">Zona Central</option>
+                            <option value="Salón Privado">Salón Privado</option>
+                            <option value="Zona VIP">Zona VIP</option>
+                        </select>
+                    </div>
 
-                        <div class="mb-3">
-                            <label>Estado</label>
-                            <select id="selectEstadoMesa" class="form-control">
-                                <option value="disponible">Disponible</option>
-                                <option value="ocupada">Ocupada</option>
-                                <option value="deshabilitada">Deshabilitada</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                    </form>
-                </div>
+                    <div class="mb-3" id="grupoEstadoMesa">
+                        <label>Estado</label>
+                        <select id="selectEstadoMesa" class="form-control">
+                            <option value="disponible">Disponible</option>
+                            <option value="ocupada">Ocupada</option>
+                            <option value="deshabilitada">Deshabilitada</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <div class="modal fade" id="modalEliminarMesa" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
