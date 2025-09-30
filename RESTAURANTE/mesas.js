@@ -1,4 +1,5 @@
 let listaMesas = JSON.parse(localStorage.getItem("listaMesas")) || [];
+let mesaAEliminar = null;
 
 function guardarListaMesas() {
     localStorage.setItem("listaMesas", JSON.stringify(listaMesas));
@@ -10,7 +11,7 @@ function estaMesaOcupada(mesa) {
     
     const reservasActivas = listaReservas.filter(reserva => {
         if (reserva.idMesaAsignada !== mesa.ubicacionMesa) return false;
-        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Expirada") return false;
+        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Finalizada") return false;
         
         const inicioReserva = new Date(`${reserva.fechaReserva}T${reserva.horaReserva}`);
         const finReserva = new Date(inicioReserva.getTime() + (reserva.duracionHoras || 2) * 60 * 60 * 1000);
@@ -29,7 +30,7 @@ function estaMesaDisponibleEnHorario(mesa, fecha, hora, duracion, indiceReservaE
     return !listaReservas.some((reserva, i) => {
         if (i === indiceReservaEditar) return false;
         if (reserva.idMesaAsignada !== mesa.ubicacionMesa) return false;
-        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Expirada") return false;
+        if (reserva.estadoReserva === "Cancelada" || reserva.estadoReserva === "Finalizada") return false;
         
         const inicioExistente = new Date(`${reserva.fechaReserva}T${reserva.horaReserva}`);
         const finExistente = new Date(inicioExistente.getTime() + (reserva.duracionHoras || 2) * 60 * 60 * 1000);
@@ -51,6 +52,8 @@ function mostrarMesas() {
         let estadoReal = mesa.estadoMesa;
         if (mesa.estadoMesa === "disponible" && estaMesaOcupada(mesa)) {
             estadoReal = "ocupada";
+        } else if (mesa.estadoMesa === "disponible") {
+            estadoReal = "disponible";
         }
         
         let divMesa = document.createElement("div");
@@ -75,7 +78,13 @@ function mostrarMesas() {
 document.getElementById("btnAgregarMesa").addEventListener("click", () => {
     document.getElementById("formularioMesa").reset();
     document.getElementById("indiceMesa").value = "";
-    new bootstrap.Modal(document.getElementById("modalMesa")).show();
+    document.getElementById("grupoEstadoMesa").classList.add("d-none");
+    
+    const modal = new bootstrap.Modal(document.getElementById("modalMesa"), {
+    backdrop: 'static',
+    keyboard: false
+    });
+    modal.show();
 });
 
 document.getElementById("formularioMesa").addEventListener("submit", (e) => {
@@ -84,7 +93,7 @@ document.getElementById("formularioMesa").addEventListener("submit", (e) => {
     const indice = document.getElementById("indiceMesa").value;
     const capacidad = document.getElementById("inputCapacidadMesa").value;
     const ubicacion = document.getElementById("selectUbicacion").value;
-    const estado = document.getElementById("selectEstadoMesa").value;
+    const estado = indice ? document.getElementById("selectEstadoMesa").value : "disponible";
 
     if (indice) {
         listaMesas[indice].capacidadMesa = capacidad;
@@ -95,17 +104,20 @@ document.getElementById("formularioMesa").addEventListener("submit", (e) => {
             nombreMesa: `Mesa ${listaMesas.length + 1}`,
             capacidadMesa: capacidad,
             ubicacionMesa: ubicacion,
-            estadoMesa: estado
+            estadoMesa: "disponible"
         });
     }
 
     guardarListaMesas();
     mostrarMesas();
 
+    const mensaje = indice ? "¡Mesa editada correctamente!" : "¡Mesa guardada correctamente!";
+    const texto = indice ? "La mesa fue editada correctamente." : "La mesa fue registrada correctamente.";
+
     Swal.fire({
         icon: "success",
-        title: "¡Mesa guardada!",
-        text: "La mesa fue registrada correctamente.",
+        title: mensaje,
+        text: texto,
         confirmButtonText: "Aceptar"
     });
 
@@ -136,10 +148,15 @@ function abrirEdicionMesa(indice) {
     document.getElementById("inputCapacidadMesa").value = mesa.capacidadMesa;
     document.getElementById("selectUbicacion").value = mesa.ubicacionMesa;
     document.getElementById("selectEstadoMesa").value = mesa.estadoMesa;
-    new bootstrap.Modal(document.getElementById("modalMesa")).show();
+    
+    document.getElementById("grupoEstadoMesa").classList.remove("d-none");
+    
+    const modal = new bootstrap.Modal(document.getElementById("modalMesa"), {
+    backdrop: 'static',
+    keyboard: false
+    });
+    modal.show();
 }
-
-let mesaAEliminar = null;
 
 function borrarMesa(indice) {
     mesaAEliminar = indice;
