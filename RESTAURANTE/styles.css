@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(13deg, #000000, #d3d3d3, #000000); 
+    background: rgb(92, 92, 92);
     background-attachment: fixed; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -100,6 +100,11 @@ input, select, textarea {
     border-radius: 6px !important;
 }
 
+.card-img, .card-img-bottom, .card-img-top{
+    height: 200px !important;
+    object-fit: cover !important;
+}
+
 h1 {
     color: white;
     font-weight: bold;
@@ -136,7 +141,6 @@ h1 {
     font-style: italic;
 }
 
-/* Responsive styles */
 @media (max-width: 576px) {
     .navbar-brand {
         font-size: 1.5rem; 
