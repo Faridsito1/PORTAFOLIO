@@ -22,6 +22,7 @@ function estaMesaOcupada(mesa) {
     return reservasActivas.length > 0;
 }
 
+
 function estaMesaDisponibleEnHorario(mesa, fecha, hora, duracion, indiceReservaEditar = null) {
     const listaReservas = JSON.parse(localStorage.getItem("listaReservas")) || [];
     const inicioNuevaReserva = new Date(`${fecha}T${hora}`);
@@ -37,7 +38,7 @@ function estaMesaDisponibleEnHorario(mesa, fecha, hora, duracion, indiceReservaE
         
         return inicioNuevaReserva < finExistente && finNuevaReserva > inicioExistente;
     });
-}
+}   
 
 function mostrarMesas() {
     const contenedorMesas = document.getElementById("contenedorMesas");
@@ -91,9 +92,19 @@ document.getElementById("formularioMesa").addEventListener("submit", (e) => {
     e.preventDefault();
 
     const indice = document.getElementById("indiceMesa").value;
-    const capacidad = document.getElementById("inputCapacidadMesa").value;
+    const capacidad = document.getElementById("inputCapacidadMesa").value.trim();
     const ubicacion = document.getElementById("selectUbicacion").value;
     const estado = indice ? document.getElementById("selectEstadoMesa").value : "disponible";
+
+    if (capacidad === "" || isNaN(capacidad) || capacidad <= 0) {
+        Swal.fire({
+            icon: "warning",
+            title: "Capacidad inválida",
+            text: "Por favor, ingresa un número válido mayor que 0 para la capacidad.",
+            confirmButtonText: "Aceptar"
+        });
+        return;
+    }
 
     if (indice) {
         listaMesas[indice].capacidadMesa = capacidad;
@@ -124,6 +135,7 @@ document.getElementById("formularioMesa").addEventListener("submit", (e) => {
     bootstrap.Modal.getInstance(document.getElementById("modalMesa")).hide();
     e.target.reset();
 });
+
 
 function reservarMesa(indice) {
     const mesa = listaMesas[indice];
