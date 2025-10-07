@@ -43,13 +43,15 @@ function mostrarReservas(lista = listaReservas) {
         Ninguna: "img/default.png",
     };
 
-    lista.forEach((reserva, indice) => {
+lista.forEach((reserva, indice) => {
         const estado = reserva.estadoReserva || "Pendiente";
         const imagen = imagenesOcasion[reserva.ocasionEspecial] || "img/default.png";
         
         const estaFinalizada = estado === "Finalizada";
         const estaCancelada = estado === "Cancelada";
+        const estaConfirmada = estado === "Confirmada";
         const esSoloLectura = estaFinalizada || estaCancelada;
+        const puedeEditar = !estaFinalizada && !estaCancelada && !estaConfirmada;
 
         const divReserva = document.createElement("div");
         divReserva.classList.add("col-md-4");
@@ -59,6 +61,9 @@ function mostrarReservas(lista = listaReservas) {
         }
         if (estaCancelada) {
             divReserva.classList.add("reserva-cancelada");
+        }
+        if (estaConfirmada) {
+            divReserva.classList.add("reserva-confirmada");
         }
         
         divReserva.innerHTML = `
@@ -74,11 +79,13 @@ function mostrarReservas(lista = listaReservas) {
                     <p>⏳ Duración: ${reserva.duracionHoras > 0 ? reserva.duracionHoras : 2}h</p>
                     <p>Estado: <b class="estado-${estado.toLowerCase()}">${estado}</b></p>
                     <div class="mt-2 d-flex gap-1 flex-wrap">
-                        <button class="btn btn-warning btn-sm" onclick="abrirEdicionReserva(${indice})" ${esSoloLectura ? "disabled" : ""}>Editar</button>
+                        <button class="btn btn-warning btn-sm" onclick="abrirEdicionReserva(${indice})" ${!puedeEditar ? "disabled" : ""}>Editar</button>
                         <button class="btn btn-success btn-sm" onclick="confirmarReserva(${indice})" ${estaFinalizada || estaCancelada ? "disabled" : ""}>Pagar</button>
                         <button class="btn btn-danger btn-sm" onclick="cancelarReserva(${indice})" ${estaFinalizada || estaCancelada ? "disabled" : ""}>Cancelar</button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarReserva(${indice})" ${!esSoloLectura ? "disabled" : ""}>Eliminar</button>
-                
+                        <button class="btn btn-danger btn-sm" onclick="eliminarReserva(${indice})" ${estaFinalizada ? "disabled" : (!esSoloLectura ? "disabled" : "")}>Eliminar</button>
+
+                    </div>
+                </div>
             </div>
         `;
         contenedorReservas.appendChild(divReserva);
@@ -101,6 +108,8 @@ function hayConflictoReserva(nuevaReserva, indiceEditar = null) {
         return inicioNueva < finExistente && finNueva > inicioExistente;
     });
 }
+
+//
 
 function cargarMesasDisponibles(fecha, hora, duracion, indiceReservaEditar = null) {
     const selectMesas = document.getElementById("selectMesasDisponibles");
@@ -396,21 +405,29 @@ function actualizarEstadosAutomaticos() {
     const ahora = new Date();
 
     listaReservas.forEach((reserva, i) => {
-        if (reserva.estadoReserva === "Pendiente") {
-            const inicio = new Date(`${reserva.fechaReserva}T${reserva.horaReserva}`);
-            const fin = new Date(
-                inicio.getTime() + (reserva.duracionHoras || 2) * 60 * 60 * 1000
-            );
+        const inicio = new Date(`${reserva.fechaReserva}T${reserva.horaReserva}`);
+        const fin = new Date(
+            inicio.getTime() + (reserva.duracionHoras || 2) * 60 * 60 * 1000
+        );
 
-            if (ahora > fin) {
-                listaReservas[i].estadoReserva = "Finalizada";
-            }
+        if (reserva.estadoReserva === "Pendiente" && ahora >= inicio && ahora <= fin) {
+            listaReservas[i].estadoReserva = "Confirmada";
+        }
+        
+        if (reserva.estadoReserva === "Confirmada" && ahora > fin) {
+            listaReservas[i].estadoReserva = "Finalizada";
+        }
+        
+        if (reserva.estadoReserva === "Pendiente" && ahora > fin) {
+            listaReservas[i].estadoReserva = "Finalizada";
         }
     });
 
     guardarListaReservas();
     mostrarReservas();
 }
+
+//
 
 document.getElementById("inputFechaReserva")?.addEventListener("change", actualizarMesasDisponibles);
 document.getElementById("inputHoraReserva")?.addEventListener("change", actualizarMesasDisponibles);
