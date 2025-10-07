@@ -233,3 +233,16 @@ h1 {
     }
 }
 
+.reserva-confirmada {
+    border-left: 4px solid #28a745;
+}
+
+.estado-confirmada {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.tarjeta-reserva.reserva-completada {
+    opacity: 0.8;
+    background-color: #f8f9fa;
+}
