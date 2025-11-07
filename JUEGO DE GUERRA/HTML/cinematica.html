@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinemática - COD WWII</title>
+  <link rel="stylesheet" href="/STYLES/cinematica.css">
+</head>
+
+<body>
+  <div class="cinematic-container">
+    <div class="loading-screen" id="loadingScreen">
+      <h1 class="loading-title">CALL OF DUTY</h1>
+      <p class="loading-subtitle">WORLD WAR II</p>
+      <div class="loading-bar-container">
+        <div class="loading-bar-fill"></div>
+      </div>
+      <p class="loading-text">LOADING MISSION...</p>
+    </div>
+
+    <video id="cinematic-video" autoplay muted playsinline>
+      <source src="/assets/cinematica.mp4" type="video/mp4">
+      Tu navegador no soporta el video.
+    </video>
+
+    <div class="character-info">
+      <div class="character-tag">
+        <div class="character-label">SOLDIER</div>
+        <div class="character-value" id="char-display">OPERATIONS OFFICER</div>
+      </div>
+      <div class="character-tag">
+        <div class="character-label">VEHICLE</div>
+        <div class="character-value" id="vehicle-display">M4 SHERMAN</div>
+      </div>
+    </div>
+
+    <button class="skip-button" onclick="skipCinematic()">
+      PRESS ESC TO SKIP
+    </button>
+  </div>
+
+  <script src="/SCRIPT/cinematica.js"></script>
+</body>
+</html>

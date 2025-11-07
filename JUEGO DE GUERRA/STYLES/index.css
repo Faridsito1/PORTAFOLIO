@@ -1,0 +1,352 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            opacity: 0.8;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, #ff8c00 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 60px;
+            animation: logoEntrance 2s ease-out;
+            filter: drop-shadow(0 0 40px rgba(73, 72, 72, 0.6)) drop-shadow(0 0 80px rgba(32, 32, 32, 0.4));
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                transform: scale(0.5) translateY(-50px);
+                opacity: 0;
+                filter: blur(10px);
+            }
+
+            60% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .logo-glow {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            background: radial-gradient(ellipse at center,
+                    rgba(88, 87, 86, 0.4) 0%,
+                    rgba(95, 94, 93, 0.2) 30%,
+                    transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes pulse {  
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        .logo-container img {
+            width: 600px;
+            height: auto;
+            position: relative;
+            z-index: 2;
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .btn-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .start-button {
+            padding: 20px 60px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #7e7d7d 0%, #d3d0cc 50%, #686665 100%);
+            border: 3px solid #111111;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 0 20px rgba(255, 140, 0, 0.6),
+                0 0 40px rgba(255, 100, 0, 0.4),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+                inset 0 3px 10px rgba(255, 255, 255, 0.2);
+            animation: buttonEntrance 2s ease-out 0.5s backwards;
+        }
+
+        @keyframes buttonEntrance {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .start-button:hover {
+            transform: scale(1.05) translateY(-3px);
+            background: linear-gradient(135deg, #ff7700 0%, #ffaa00 50%, #ff7700 100%);
+            box-shadow:
+                0 0 30px rgba(255, 140, 0, 0.8),
+                0 0 60px rgba(255, 100, 0, 0.6),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+                inset 0 3px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .start-button:active {
+            transform: scale(0.98) translateY(0);
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center top,
+                    rgba(139, 69, 19, 0.1) 0%,
+                    transparent 60%);
+            pointer-events: none;
+        }
+
+        .light-rays {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(to bottom, transparent 40%, rgba(255, 140, 0, 0.03) 50%, transparent 60%),
+                linear-gradient(to bottom, transparent 60%, rgba(255, 140, 0, 0.02) 70%, transparent 80%);
+            pointer-events: none;
+            animation: raysMove 8s ease-in-out infinite;
+        }
+
+
+        @keyframes raysMove {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container img {
+                width: 80vw;
+                max-width: 400px;
+            }
+
+            .start-button {
+                padding: 15px 40px;
+                font-size: 16px;
+            }
+        }
+
+        /* Efecto base */
+        .start-button {
+            background: linear-gradient(90deg, #f8b700, #ff6600);
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.6);
+        }
+
+        /* Brillo animado al pasar el mouse */
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px gold, 0 0 60px orange;
+        }
+
+        /* Al presionar (animación épica) */
+        .start-pressed {
+            animation: epic-press 1s ease forwards;
+        }
+
+        @keyframes epic-press {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 30px gold, 0 0 60px orange;
+            }
+
+            30% {
+                transform: scale(1.2);
+                box-shadow: 0 0 80px gold, 0 0 120px orange;
+                filter: brightness(1.5);
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.7);
+                opacity: 0;
+                box-shadow: 0 0 0 transparent;
+            }
+        }
+
+        /* El logo se acerca lentamente */
+        .logo-zoom {
+            animation: logoEpicZoom 1.5s ease forwards;
+        }
+
+        @keyframes logoEpicZoom {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.3);
+                filter: brightness(1.3);
+            }
+
+            100% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Desvanecer toda la pantalla */
+        .fade-out {
+            animation: fadeScreen 1s ease forwards;
+        }
+
+        @keyframes fadeScreen {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Vehículo - COD WWII</title>
+  <link rel="stylesheet" href="/STYLES/detallesVehiculos.css">
+</head>
+
+<body>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="/assets/menu.mp4" type="video/mp4">
+    Tu navegador no soporta el video de fondo.
+  </video>
+
+  <div class="resources">
+    <div class="resource-item">
+      <div class="resource-icon">$</div>
+      <span class="resource-amount">0</span>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">⚔</div>
+      <span class="resource-amount">125</span>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">★</div>
+      <span class="resource-amount">2</span>
+    </div>
+  </div>
+
+  <div class="vehicle-details">
+    <div class="vehicle-display">
+      <h1 class="vehicle-name" id="vehicle-name">M4 SHERMAN</h1>
+      <p class="vehicle-subtitle" id="vehicle-subtitle">American Medium Tank</p>
+      
+      <div class="vehicle-model-container">
+        <div class="model-loading" id="model-loading">Loading 3D Model...</div>
+        <iframe id="vehicle-model" frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="stats-panel">
+      <div class="specifications-grid">
+        <div class="spec-card">
+          <div class="spec-icon">🛡</div>
+          <div class="spec-label">ARMOR RATING</div>
+          <div class="spec-value" id="armor-value">7/10</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">⚡</div>
+          <div class="spec-label">SPEED RATING</div>
+          <div class="spec-value" id="speed-value">6/10</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">💥</div>
+          <div class="spec-label">FIREPOWER</div>
+          <div class="spec-value" id="firepower-value">8/10</div>
+        </div>
+        <div class="spec-card">
+          <div class="spec-icon">👥</div>
+          <div class="spec-label">CREW SIZE</div>
+          <div class="spec-value" id="crew-value">5</div>
+        </div>
+      </div>
+
+      <div class="vehicle-loadout">
+        <div class="loadout-header">
+          <h2 class="loadout-title" id="loadout-title">MAIN ARMAMENT</h2>
+          <span class="loadout-label">EQUIPPED</span>
+        </div>
+        
+        <p class="loadout-description" id="loadout-desc">
+          75mm M3 Gun with excellent accuracy and penetration against medium armor.
+        </p>
+
+        <div class="section-header">
+          <span class="section-arrow">»</span>
+          <span>COMBAT STATISTICS</span>
+        </div>
+        
+        <div class="stat-bar-container">
+          <div class="stat-bar-info">
+            <span class="stat-bar-label">Armor Penetration</span>
+            <span class="stat-bar-value">80%</span>
+          </div>
+          <div class="stat-bar">
+            <div class="stat-bar-fill" style="width: 80%"></div>
+          </div>
+        </div>
+
+        <div class="stat-bar-container">
+          <div class="stat-bar-info">
+            <span class="stat-bar-label">Mobility</span>
+            <span class="stat-bar-value">70%</span>
+          </div>
+          <div class="stat-bar">
+            <div class="stat-bar-fill" style="width: 70%"></div>
+          </div>
+        </div>
+
+        <div class="stat-bar-container">
+          <div class="stat-bar-info">
+            <span class="stat-bar-label">Rate of Fire</span>
+            <span class="stat-bar-value">65%</span>
+          </div>
+          <div class="stat-bar">
+            <div class="stat-bar-fill" style="width: 65%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="action-btn btn-back" onclick="goBack()">
+      ESC - VOLVER
+    </button>
+    <button class="action-btn btn-start" onclick="startMatch()">
+      INICIAR PARTIDA
+    </button>
+  </div>
+  
+  <script src="/SCRIPT/detallesVehiculos.js"></script>
+</body>
+</html>

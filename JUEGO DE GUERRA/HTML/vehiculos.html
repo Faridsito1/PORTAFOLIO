@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selección de Vehículos - COD WWII</title>
+  <link rel="stylesheet" href="/STYLES/vehiculos.css">
+</head>
+
+<body>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="/assets/menu.mp4" type="video/mp4">
+    Tu navegador no soporta el video de fondo.
+  </video>
+
+  <h1 class="section-title">VEHICLE SELECT</h1>
+  <p class="section-subtitle">Choose your machine of war</p>
+
+  <div class="vehicle-select">
+    <div class="vehicle-grid">
+      <div class="vehicle-card" onclick="selectVehicle('sherman')">
+        <div class="vehicle-image-container">
+          <img src="/assets/m4.png" alt="M4 Sherman">
+        </div>
+        <div class="vehicle-info">
+          <span class="vehicle-type">MEDIUM TANK</span>
+          <h3>M4 SHERMAN</h3>
+          <p>American medium tank. Reliable firepower and armor balance for frontline combat.</p>
+          <div class="vehicle-stats">
+            <div class="stat-item">
+              <span class="stat-icon">🛡</span>
+              <span>Armor: 7/10</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-icon">⚡</span>
+              <span>Speed: 6/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vehicle-card" onclick="selectVehicle('tiger')">
+        <div class="vehicle-image-container">
+          <img src="/assets/heli.png" alt="Tiger I">
+        </div>
+        <div class="vehicle-info">
+          <span class="vehicle-type">HEAVY TANK</span>
+          <h3>TIGER I</h3>
+          <p>German heavy tank. Devastating firepower and thick armor dominates the battlefield.</p>
+          <div class="vehicle-stats">
+            <div class="stat-item">
+              <span class="stat-icon">🛡</span>
+              <span>Armor: 10/10</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-icon">⚡</span>
+              <span>Speed: 4/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vehicle-card" onclick="selectVehicle('jeep')">
+        <div class="vehicle-image-container">
+          <img src="/assets/jeep.png" alt="Willys Jeep">
+        </div>
+        <div class="vehicle-info">
+          <span class="vehicle-type">LIGHT VEHICLE</span>
+          <h3>WILLYS JEEP</h3>
+          <p>Allied reconnaissance vehicle. Fast and agile for rapid tactical deployment.</p>
+          <div class="vehicle-stats">
+            <div class="stat-item">
+              <span class="stat-icon">🛡</span>
+              <span>Armor: 2/10</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-icon">⚡</span>
+              <span>Speed: 10/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vehicle-card" onclick="selectVehicle('halftrack')">
+        <div class="vehicle-image-container">
+          <img src="/assets/m3.png" alt="M3 Halftrack">
+        </div>
+        <div class="vehicle-info">
+          <span class="vehicle-type">TRANSPORT</span>
+          <h3>M3 HALFTRACK</h3>
+          <p>Armored personnel carrier. Transport troops safely across dangerous terrain.</p>
+          <div class="vehicle-stats">
+            <div class="stat-item">
+              <span class="stat-icon">🛡</span>
+              <span>Armor: 5/10</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-icon">⚡</span>
+              <span>Speed: 7/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="back-button" onclick="backToCharacters()">← VOLVER</button>
+  </div>
+
+  <script src="/SCRIPT/vehiculos.js"></script>
+</body>
+</html>

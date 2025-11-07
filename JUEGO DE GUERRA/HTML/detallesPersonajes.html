@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Personaje - COD WWII</title>
+  <link rel="stylesheet" href="/STYLES/detallesPersonaje.css">
+</head>
+
+<body>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="/assets/menu.mp4" type="video/mp4">
+    Tu navegador no soporta el video de fondo.
+  </video>
+
+  <div class="resources">
+    <div class="resource-item">
+      <div class="resource-icon">$</div>
+      <span class="resource-amount">0</span>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">⚔</div>
+      <span class="resource-amount">125</span>
+    </div>
+    <div class="resource-item">
+      <div class="resource-icon">★</div>
+      <span class="resource-amount">2</span>
+    </div>
+  </div>
+
+  <div class="character-details">
+    <div class="character-display">
+      <h1 class="character-name" id="char-name">MAJOR HOWARD</h1>
+      <p class="character-subtitle" id="char-subtitle">Complete Orders. Get Rewarded.</p>
+
+      <div class="character-image-container">
+        <div class="model-loading" id="model-loading">Loading 3D Model...</div>
+        <iframe id="character-model" frameborder="0" allow="autoplay; fullscreen; xr-spatial-tracking"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="stats-panel">
+      <div class="missions-grid">
+        <div class="mission-badge active">
+          <div class="badge-icon">24</div>
+          <div class="badge-level">Level 24</div>
+        </div>
+        <div class="mission-badge active">
+          <div class="badge-icon">24</div>
+          <div class="badge-level">Level 24</div>
+        </div>
+        <div class="mission-badge active">
+          <div class="badge-icon">24</div>
+          <div class="badge-level">Level 24</div>
+        </div>
+      </div>
+
+      <div class="active-order">
+        <div class="order-header">
+          <h2 class="order-title">WAR GRENADIER</h2>
+          <span class="order-label">Daily Order</span>
+        </div>
+
+        <p class="order-description">
+          Kill 3 or more enemies with a single grenade in War.
+        </p>
+
+        <div class="order-timer">New Orders Available in:</div>
+        <div class="order-countdown">0d 16h 49m 14s</div>
+
+        <div class="section-header">
+          <span class="section-arrow">»</span>
+          <span>PROGRESS</span>
+        </div>
+
+        <div class="progress-info">
+          <span class="progress-label">STEPS COMPLETED</span>
+          <span class="progress-value">0/1</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+
+        <div class="rewards-section">
+          <div class="section-header">
+            <span class="section-arrow">»</span>
+            <span>REWARDS</span>
+          </div>
+          <div class="reward-item">
+            <div class="reward-icon">🛡</div>
+            <div class="reward-text">25% Bonus XP For 20 Minutes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="action-btn btn-back" onclick="goBack()">
+      ESC - Back
+    </button>
+    <div style="display: flex; gap: 20px;">
+      <button class="action-btn btn-secondary" onclick="abandonOrders()">
+        ENTER
+      </button>
+    </div>
+  </div>
+
+  <script src="/SCRIPT/detallesPersonajes.js"></script>
+</body>
+
+</html>
