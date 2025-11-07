@@ -285,7 +285,7 @@
     }
 
     .proyectos {
-      flex: 2;
+      flex: 3;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 25px;
@@ -515,3 +515,4 @@
     .habilidadesTecnicas{
       padding-right: 140px;
     }
+
